@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             mc:Ignorable="d"
+             x:Class="WarehouseOrganizer.Views.BindItemToPlacePage"
+             Title="{Binding Title}" IsBusy="{Binding isBusy, Mode=OneWay}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Bind Item To Place" Command="{Binding BindItemToPlaceCommand}" />
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Item" FontSize="Medium"/>
+            <Entry Text="{Binding ItemId, Mode=TwoWay}" MaxLength="19" FontSize="Small" 
+                    Placeholder="Enter or Scan Number" Keyboard="Numeric" IsReadOnly="{Binding isBusy, Mode=OneWay}"/>
+            <Label Text="Item Description:" FontSize="Medium" />
+            <Label Text="{Binding Item.ItemType, Mode=OneWay}" FontSize="Small" />
+            <Label Text="{Binding Item.SizeTextView, Mode=OneWay}" FontSize="Small"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <Button Text="Scan Item" Clicked="ScanItemId" HorizontalOptions="FillAndExpand" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+                <Button Text="Load Item" Command="{Binding LoadItemCommand}" HorizontalOptions="FillAndExpand" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+            </StackLayout>
+            <Label Text="Warehouse Place" FontSize="Medium"/>
+            <Entry Text="{Binding PlaceId, Mode=TwoWay}" MaxLength="19" FontSize="Small"
+                    Placeholder="Enter or Scan Number" Keyboard="Numeric" IsReadOnly="{Binding isBusy, Mode=OneWay}"/>
+            <Label Text="Place Description" FontSize="Medium" />
+            <Label Text="{Binding Place.PlaceTextView, Mode=OneWay}" FontSize="Small" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="Scan Place" Clicked="ScanPlaceId" HorizontalOptions="FillAndExpand" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+                <Button Text="Load Place" Command="{Binding LoadPlaceCommand}" HorizontalOptions="FillAndExpand" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+            </StackLayout>
+            <Button Text="Bind Item to Place" Command="{Binding BindItemToPlaceCommand}" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

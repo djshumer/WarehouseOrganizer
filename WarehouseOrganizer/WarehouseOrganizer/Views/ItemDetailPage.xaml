@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WarehouseOrganizer.Views.ItemDetailPage"
+             Title="{Binding Title}" >
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Item Type:" FontSize="Medium" />
+        <Entry Text="{Binding ItemType}" d:Text="Item Type" MaxLength="150" FontSize="Small" IsReadOnly="{Binding IsReadOnly}"/>
+        <Label Text="Width:" FontSize="Medium" />
+        <Entry Text="{Binding SizeWidth, StringFormat='{0:f2}', Mode=TwoWay}" d:Text="15.00" FontSize="Small" IsReadOnly="{Binding IsReadOnly}" Keyboard="Numeric"/>
+        <Label Text="Height:" FontSize="Medium" />
+        <Entry Text="{Binding SizeHeight, StringFormat='{0:f2}', Mode=TwoWay}" d:Text="15.00" FontSize="Small" IsReadOnly="{Binding IsReadOnly}" Keyboard="Numeric"/>
+        <Label Text="Depth:" FontSize="Medium" />
+        <Entry Text="{Binding SizeDepth, StringFormat='{0:f2}', Mode=TwoWay}" d:Text="15.00" FontSize="Small" IsReadOnly="{Binding IsReadOnly}" Keyboard="Numeric" />
+        <Label Text="Date of production:" FontSize="Medium" />
+        <Entry Text="{Binding DateOfProduction, Mode=TwoWay, StringFormat='{0:d}'}" d:Text="8.10.2019" FontSize="Small" IsReadOnly="{Binding IsReadOnly}" Keyboard="Numeric"/>
+        
+    </StackLayout>
+    
+</ContentPage>

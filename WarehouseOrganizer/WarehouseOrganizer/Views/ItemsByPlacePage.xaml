@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WarehouseOrganizer.Views.ItemsByPlacePage"
+             Title="{Binding Title}"
+             x:Name="BrowseItemsByPlacePage" IsBusy="{Binding isBusy, Mode=OneWay}">
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Place Number" FontSize="Medium"/>
+            <Entry Text="{Binding WarehousePlaceId, Mode=TwoWay}"
+                   Placeholder="Enter or Scan Number" Keyboard="Numeric" FontSize="Small" IsReadOnly="{Binding isBusy, Mode=OneWay}"/>
+            <!--<Label Text="Place View"/>-->
+            <Entry Text="{Binding PlaceView.PlaceTextView, Mode=OneWay}" IsReadOnly="true" FontSize="Small"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="Scan Place" Clicked="ScanPlaceId"  HorizontalOptions="FillAndExpand" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+                <Button Text="Load Items" Command="{Binding LoadItemsByPlaceIdCommand}" HorizontalOptions="FillAndExpand" IsEnabled="{Binding isReady, Mode=OneWay}"/>
+            </StackLayout>
+        </StackLayout>
+        <ListView x:Name="ItemsListView"
+                ItemsSource="{Binding ItemsView}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsByPlaceIdCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnItemSelected">
+            <d:ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>First Detail Item 1</x:String>
+                    <x:String>Second Detail Item 2</x:String>
+                    <x:String>Third Detail Item 3</x:String>
+                    <x:String>Forth Detail Item 4</x:String>
+                    <x:String>Fifth Detail Item 5</x:String>
+                    <x:String>Sixth Detail Item 6</x:String>
+                </x:Array>
+            </d:ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding ItemType}" 
+                                d:Text="{Binding .}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding SizeTextView}" 
+                                    d:Text="Size: 15.55x18.00x8.00"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                                <Label Text="{Binding DateOfProduction, StringFormat='{0:d}'}" 
+                                    d:Text="08.10.2019"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>    
+</ContentPage>
