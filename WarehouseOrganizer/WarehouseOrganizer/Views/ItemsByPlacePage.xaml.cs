@@ -21,7 +21,6 @@ namespace WarehouseOrganizer.Views
             BindingContext = _viewModel = DependencyService.Get<ItemsByPlaceViewModel>();
         }
 
-      
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var item = args.SelectedItem as ItemDetailViewModel;
@@ -36,9 +35,12 @@ namespace WarehouseOrganizer.Views
 
         async void ScanPlaceId(object sender, EventArgs e)
         {
+            var btn = sender as Button;
+            btn.IsEnabled = false;
             FullScreenScanPage page = new FullScreenScanPage(EnumScanType.WarehousePlace);
             page.AdvPageOnScanResult += Page_AdvPageOnScanResult; ;
             await Navigation.PushModalAsync(page);
+            btn.IsEnabled = true;
         }
 
         private async void Page_AdvPageOnScanResult(object sender, ZXing.Result result)

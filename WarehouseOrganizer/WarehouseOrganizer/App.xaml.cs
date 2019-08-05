@@ -19,14 +19,23 @@ namespace WarehouseOrganizer
         public static string AzureBackendUrl =
             DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
         
-        public static bool UseMockDataStore = false;
+        public static bool UseMockDataStore = true;
 
         public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<IItemDataStore, ItemDataStore>();
-            DependencyService.Register<IDataStore<WarehousePlace>, WarehousePlacesDataStore>();
+            if (UseMockDataStore)
+            {
+                DependencyService.Register<IItemDataStore, MockItemDataStore>();
+                DependencyService.Register<IDataStore<WarehousePlace>, MockWarehouseDataStore>();
+
+            }
+            else
+            {
+                DependencyService.Register<IItemDataStore, ItemDataStore>();
+                DependencyService.Register<IDataStore<WarehousePlace>, WarehousePlacesDataStore>();
+            }
             DependencyService.Register<BindItemToPlaceViewModel>();
             DependencyService.Register<ItemsByPlaceViewModel>();
 

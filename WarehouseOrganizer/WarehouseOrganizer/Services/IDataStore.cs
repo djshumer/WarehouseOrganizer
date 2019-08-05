@@ -7,7 +7,7 @@ namespace WarehouseOrganizer.Services
 {
     public interface IDataStore<TEntity> where TEntity : BaseEntitySimpleModel
     {
-        Task<bool> AddEntityAsync(TEntity Entity);
+        Task<bool> AddEntityAsync(TEntity entity);
         Task<bool> UpdateEntityAsync(TEntity Entity);
         Task<bool> DeleteEntityAsync(long id);
         Task<TEntity> GetEntityAsync(long id);

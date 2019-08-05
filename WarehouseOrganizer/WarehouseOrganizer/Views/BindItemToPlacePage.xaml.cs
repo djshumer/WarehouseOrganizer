@@ -20,14 +20,22 @@ namespace WarehouseOrganizer.Views
 
         async void ScanItemId(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new FullScreenScanPage(EnumScanType.Item));
+            var btn = sender as Button;
+            btn.IsEnabled = false;
+            FullScreenScanPage page = new FullScreenScanPage(EnumScanType.Item);
+            page.AdvPageOnScanResult += Page_AdvPageOnScanResult; ;
+            await Navigation.PushModalAsync(page);
+            btn.IsEnabled = true;
         }
 
         async void ScanPlaceId(object sender, EventArgs e)
         {
+            var btn = sender as Button;
+            btn.IsEnabled = false;
             FullScreenScanPage page = new FullScreenScanPage(EnumScanType.WarehousePlace);
             page.AdvPageOnScanResult += Page_AdvPageOnScanResult; ;
             await Navigation.PushModalAsync(page);
+            btn.IsEnabled = true;
         }
 
         private async void Page_AdvPageOnScanResult(object sender, ZXing.Result result)

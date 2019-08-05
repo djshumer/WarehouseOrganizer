@@ -57,6 +57,10 @@ namespace WarehouseOrganizer.ViewModels
                 try
                 {
                     var place = await PlaceDataStore.GetEntityAsync(_warehousePlaceId);
+                    if (place == null) {
+                        ShowInformationUserMessage(this, "Warehouse place not found", "Cancel");
+                        return;
+                    };
                     PlaceView = new WarehousePlaceDetailViewModel(place);
                 }
                 catch (HttpRequestException ex)
